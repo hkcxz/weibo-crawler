@@ -1294,7 +1294,7 @@ class Weibo(object):
         try:
             dir_name = self.user["screen_name"]
             if self.user_id_as_folder_name:
-                dir_name = self.user_config["user_id"]
+                dir_name = str(self.user_config["user_id"])
             file_dir = (
                 os.path.split(os.path.realpath(__file__))[0]
                 + os.sep
@@ -1308,7 +1308,7 @@ class Weibo(object):
                 os.makedirs(file_dir)
             if type == "img" or type == "video":
                 return file_dir
-            file_path = file_dir + os.sep + self.user_config["user_id"] + "." + type
+            file_path = file_dir + os.sep + str(self.user_config["user_id"]) + "." + type
             return file_path
         except Exception as e:
             logger.exception(e)
@@ -1330,6 +1330,7 @@ class Weibo(object):
             "转发数",
             "话题",
             "@用户",
+            "完整日期",
         ]
         if not self.only_crawl_original:
             result_headers2 = ["是否原创", "源用户id", "源用户昵称"]
